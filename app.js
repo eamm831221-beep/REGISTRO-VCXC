@@ -153,20 +153,35 @@ const BASE_SERVIDORES = {
 
 // 1. INICIALIZADOR AL CARGAR LA PÁGINA
 window.addEventListener('DOMContentLoaded', () => {
-    // Recuperar la última CURP para agilizar el acceso del Servidor
     const ultimaCurpGuardada = localStorage.getItem('ultima_curp_vcxc');
     if (ultimaCurpGuardada && document.getElementById('input-curp')) {
         document.getElementById('input-curp').value = ultimaCurpGuardada;
     }
     
-    // Registro correcto del Service Worker (Buscándolo en la raíz de carpetas)
+    // === AGREGA ESTA SECCIÓN PARA ACTIVAR LOS BOTONES ===
+    // Activa el botón de ingresar con CURP
+    const botonIngresar = document.querySelector('#screen-1 button');
+    if (botonIngresar) {
+        botonIngresar.addEventListener('click', validarAccesoCURP);
+    }
+    
+    // Activa la tecla "Enter" en el teclado del celular para ingresar
+    const inputCurp = document.getElementById('input-curp');
+    if (inputCurp) {
+        inputCurp.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') validarAccesoCURP();
+        });
+    }
+    // ====================================================
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./js/sw.js')
-            .then(() => console.log('Service Worker registrado con éxito para trabajo Offline.'))
+            .then(() => console.log('Service Worker registrado con éxito.'))
             .catch(err => console.log('Error de Service Worker:', err));
     }
     actualizarContador();
 });
+
 
 // 2. NAVEGACIÓN ENTRE PANTALLAS CON EFECTO DE DESVANECIMIENTO
 function irAPantalla(screenNumber) {
