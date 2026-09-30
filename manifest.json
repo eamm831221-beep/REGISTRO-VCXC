@@ -1,0 +1,16 @@
+{
+  "name": "Sistema de Registro VCXC",
+  "short_name": "Registro VCXC",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme-color": "#66001c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/d0vkfb03/SIN-FONDO.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
